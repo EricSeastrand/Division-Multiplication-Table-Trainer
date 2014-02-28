@@ -1,7 +1,9 @@
 Division-Multiplication-Table-Trainer
 =====================================
 
-Learn your multiplication and division tables in no time at all.
+Live demo: http://ericseastrand.com/math/
+
+Learn your multiplication and division tables on any smartphone, tablet, or computer.
 
 
 Math, like any skill, requires practice to perfect!
