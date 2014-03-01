@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 	<head>
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+
+
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
@@ -19,6 +23,7 @@
 
 	</head>
 	<body>
+
 		<section class="difficulty-wrapper" title="Move the sliders to change the difficulty. After you get enough problems right, the computer will automatically increase the difficulty for you!">
 			
 			<div class="min-number-wrapper" title="The lowest number you want to be quizzed on.">
@@ -59,8 +64,7 @@
 
 		<section id="answer">
 			<form id="answer_form" title='Enter your answer here, and click "Check Answer" to see if you got it right! If you prefer, you may use the [Enter] key on your keyboard instead.'>
-				<label for="response_field" >Your Answer</label>
-				<input type="number" id="response_field" placeholder="??" step=1 />
+				<input type="number" id="response_field" placeholder="Enter your answer." step=1 />
 				<button type="submit" class="check-answer" id="check_answer">Check Answer</button>
 			</form>
 		</section>

@@ -31,6 +31,10 @@ window.mathhelper = (function($){
 		dom.rightAnswers = $('.answered-correctly');
 		dom.wrongAnswers = $('.answered-incorrectly');
 		dom.historyContainer = $('section.history').hide();
+
+		dom.rightAnswersWrapper = $('.answered-correctly-wrapper').hide();
+		dom.wrongAnswersWrapper = $('.answered-incorrectly-wrapper').hide();
+
 		dom.allowSquares = $('#allow_perfect_squares')
 			.button({
 				label: 'Include Squares',
@@ -91,13 +95,15 @@ window.mathhelper = (function($){
 	self.logKnownAnswer = function(){
 		self.knownAnswers.push([self.numberOne, self.numberTwo]);
 		
-		dom.rightAnswers.append( prepareScoreboardRow() );
+		dom.rightAnswers.prepend( prepareScoreboardRow() );
+		dom.rightAnswersWrapper.slideDown();
 	};
 	
 	self.logWrongAnswer = function(){
 		self.wrongAnswers.push([self.numberOne, self.numberTwo]);
 		
-		dom.wrongAnswers.append( prepareScoreboardRow() );
+		dom.wrongAnswers.prepend( prepareScoreboardRow() );
+		dom.wrongAnswersWrapper.slideDown();
 	};
 	
 	self.loadFromWrongAnswers = function() {

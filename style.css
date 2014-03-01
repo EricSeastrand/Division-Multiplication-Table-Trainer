@@ -57,6 +57,8 @@ font-size: 135%;
 .check-answer {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+	width: 55%;
+	padding: .125% 2.25%;
 }
 
 .collapse-closest-section {
