@@ -5,6 +5,7 @@ window.mathhelper = (function($){
 		knownAnswers: []
 	};
 	var dom = self.dom = {};
+	var answerWasKnown = 0;
 	
 	self.init = function() {
 		self.initDom();
@@ -113,6 +114,14 @@ window.mathhelper = (function($){
 		self.createProblem();
 	}
 	
+	function updateSliderFromInput(){
+		_getInputValues();
+		
+		dom.difficultySetting.slider( "values", [ self.minNumber, self.maxNumber ] );
+		
+		prepareFactorGrid(self.minNumber, self.maxNumber);
+		self.createProblem();
+	}
 	
 	function prepareScoreboardRow() {
 		return $('<tr>').html(
@@ -123,40 +132,38 @@ window.mathhelper = (function($){
 			'<td>' +self.correctAnswer.toString()+ '</td>'
 		);
 	}
-	function updateSliderFromInput(){
-		_getInputValues();
-		
-		dom.difficultySetting.slider( "values", [ self.minNumber, self.maxNumber ] );
-		
-		prepareFactorGrid(self.minNumber, self.maxNumber);
-		self.createProblem();
-	}
 	function _getInputValues(){
 		self.minNumber = parseInt( dom.minNumber.val() );
 		self.maxNumber = parseInt( dom.maxNumber.val() );
 	}
 	
+	// Utility function so we don't have to specify the min and max each time we call Math.makeRandomNumber().
 	function makeRandomNumber() {
 		return Math.makeRandomNumber(self.minNumber, self.maxNumber);
-	};
-
-	Math.makeRandomNumber = function(min, max){
-		var range = max - min + 1;
-
-		var randomosity = Math.random();
-
-		return Math.floor(randomosity*range) + min;
 	}
+
+	function adjustDifficulty(howMuch) {
+		howMuch = parseInt(howMuch);
+		
+		_getInputValues();
+		
+		dom.maxNumber.val( self.maxNumber + howMuch );
+		dom.minNumber.val( self.minNumber + howMuch );
+
+		updateSliderFromInput();
+	}
+
 	
-	var answerWasKnown = 0;
 	self.createProblem = function(){
+
+		// Todo: find a less hack-ish way to determine that we are out of factors.
 		self.numberOfTries = 0;
 		if(answerWasKnown>100){
 			alert('You have correctly answered every possible number combination in this range. The difficulty will now increase automatically.'); 
 			answerWasKnown = 0;
-			dom.maxNumber.val( parseInt( dom.maxNumber.val() ) + 1 );
-			dom.minNumber.val( parseInt( dom.minNumber.val() ) - 1 );
 
+			adjustDifficulty(+1);
+			
 			return;
 		}
 		
@@ -236,7 +243,7 @@ window.mathhelper = (function($){
 			self.logKnownAnswer();
 			self.createProblem();
 		
-		}else{
+		} else {
 			var howFarOffInt = answerFromUser - correctAnswer;
 			var hint = answerFromUser < correctAnswer? 'You are not high enough!' : 'You are too high!' ;
 			var howFarOff = 'Your answer is ' +  Math.abs(howFarOffInt) + (howFarOffInt>0?' greaeter than':' less than') + ' the correct answer';
@@ -322,4 +329,13 @@ function prepareFactorGrid(minNumber, maxNumber) {
 		return gridData;
 	}
 	
+}
+
+
+Math.makeRandomNumber = function(min, max){
+	var range = max - min + 1;
+
+	var randomosity = Math.random();
+
+	return Math.floor(randomosity*range) + min;
 }

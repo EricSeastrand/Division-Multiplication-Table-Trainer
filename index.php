@@ -23,7 +23,7 @@
 			
 			<div class="min-number-wrapper" title="The lowest number you want to be quizzed on.">
 				<label for="max_number">Smallest</label>
-				<input type="number" id="min_number" value="2" />
+				<input type="number" id="min_number" min='2' value="2" />
 			</div>
 			<div class="slider-wrapper">
 				<label for="difficulty-setting">Difficulty</label>
@@ -32,7 +32,7 @@
 			
 			<div class="max-number-wrapper" title="The highest number you want to be quizzed on.">
 				<label for="max_number">Biggest</label>
-				<input type="number" id="max_number" value="6" />
+				<input type="number" id="max_number" min="2" value="5" />
 			</div>
 		</section>
 					
@@ -42,7 +42,7 @@
 				<input type="checkbox" id="allow_perfect_squares" />
 			</div>
 	
-			<div title="If you turn this on, a WRONG answer still earns you get a hint, and a second chance.">
+			<div title="Turn this on to get a second chance whenever your answer is INCORRECT.">
 				<label for="second_chance_hint" >Second Chance Hint</label>
 				<input type="checkbox" checked="checked" id="second_chance_hint" />
 			</div>
@@ -61,7 +61,7 @@
 			<form id="answer_form" title='Enter your answer here, and click "Check Answer" to see if you got it right! If you prefer, you may use the [Enter] key on your keyboard instead.'>
 				<label for="response_field" >Your Answer</label>
 				<input type="number" id="response_field" placeholder="??" step=1 />
-				<button type="submit" id="check_answer">Check Answer</button>
+				<button type="submit" class="check-answer" id="check_answer">Check Answer</button>
 			</form>
 		</section>
 		
